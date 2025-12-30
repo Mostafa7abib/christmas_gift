@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>عيد ميلاد مجيد</title>
+<title>Merry Christmas</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-    /* الخطوط الأساسية */
     body {
         margin: 0;
         font-family: 'Cairo', sans-serif;
@@ -27,7 +26,6 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* تأثير الثلج */
     .snowflake {
         position: absolute;
         top: -10px;
@@ -40,13 +38,11 @@
         animation-timing-function: linear;
         animation-iteration-count: infinite;
     }
-
     @keyframes fall {
         0% { transform: translateY(0) rotate(0deg); opacity:1; }
         100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
     }
 
-    /* البطاقة الرئيسية */
     .card {
         position: relative;
         background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
@@ -73,15 +69,12 @@
         text-shadow: 0 0 15px #ffd70055;
         animation: glow 2.5s infinite;
     }
-
     @keyframes glow {
         0%,100% { text-shadow: 0 0 10px #ffd70055; }
         50% { text-shadow: 0 0 25px #ffd700cc; }
     }
 
     h1 { font-size: 34px; margin: 15px 0 5px; }
-    
-    /* الاسم يلمع */
     .name {
         font-size: 28px;
         color: #ffd700;
@@ -89,7 +82,6 @@
         font-weight: 700;
         animation: shine 2s infinite;
     }
-
     @keyframes shine {
         0%,100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700; }
         50% { text-shadow: 0 0 20px #fff, 0 0 30px #ffd700; }
@@ -102,18 +94,14 @@
         margin: 25px auto;
     }
 
-    p {
+    .text, .verse {
         font-size: 19px;
         line-height: 1.9;
         color: #e0e0e0;
+        min-height: 120px;
     }
 
-    .verse {
-        font-style: italic;
-        font-size: 17px;
-        color: #d6c37a;
-        margin-top: 25px;
-    }
+    .verse { font-style: italic; font-size: 17px; color: #d6c37a; margin-top: 25px; }
 
     button {
         margin-top: 35px;
@@ -132,9 +120,14 @@
         box-shadow: 0 0 20px #ffd70099;
     }
 
-    .footer {
-        margin-top: 35px;
-        color: #bbb;
+    .footer { margin-top: 35px; color: #bbb; }
+
+    #secretMessage {
+        font-size: 20px;
+        color: #ffd700;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s;
     }
 </style>
 </head>
@@ -146,30 +139,46 @@
 
 <div class="card">
     <div class="icon">⭐</div>
-    <h1>عيد ميلاد مجيد</h1>
+    <h1>Merry Christmas</h1>
     <div class="name" id="friendName"></div>
-
     <div class="divider"></div>
-
-    <p>
-        مع قدوم ميلاد السيد المسيح،<br>
-        أرسل لك كل الحب والفرح والأمل.<br>
-        عسى أن يملأ السلام قلبك،<br>
-        وأن تكون أيامك الجديدة مليئة بالنجاح، الصحة، والبهجة.
-    </p>
-
-    <div class="footer">مع خالص المحبة — Darsh</div>
+    <div class="text" id="textContent"></div>
+    <button onclick="playMusic()">Play Music 🎶</button>
+    <div id="secretMessage">🎁 Surprise: Wishing you a year full of joy and success! 🎁</div>
+    <div class="footer">With love — Mostafa</div>
 </div>
 
 <script>
-    const friendName = "ENGYYYYYYYYYY";
+    const friendName = "ENGYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
     document.getElementById("friendName").textContent = friendName;
+
+    const fullText = `As the birth of Christ approaches,
+I send you all love, joy, and hope.
+May peace fill your heart,
+and may your coming days be full of success, health, and happiness.`;
+
+    const textContainer = document.getElementById("textContent");
+    let i = 0;
+
+    function typeWriter() {
+        if (i < fullText.length) {
+            textContainer.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    typeWriter();
+
+    // Show secret message after 8 seconds
+    setTimeout(() => {
+        document.getElementById("secretMessage").style.opacity = 1;
+    }, 8000);
 
     function playMusic() {
         document.getElementById("music").play();
     }
 
-    // إضافة الثلج
+    // Add snow
     const snowCount = 60;
     for(let i=0;i<snowCount;i++){
         const snow = document.createElement('div');
@@ -185,6 +194,7 @@
 
 </body>
 </html>
+
 
 </script>
 
