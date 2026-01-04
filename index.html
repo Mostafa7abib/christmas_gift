@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Marry Christmas</title>
+<title>عيد ميلاد سعيد</title>
 <style>
 body {
     margin: 0;
@@ -12,7 +12,7 @@ body {
     font-family: 'Arial', sans-serif;
     color: white;
     text-align: center;
-    direction: rtl; /* العربية من اليمين لليسار */
+    direction: rtl;
 }
 
 h1 {
@@ -44,6 +44,7 @@ button {
     box-shadow: 0 0 30px pink;
     font-size: 20px;
     white-space: pre-wrap; 
+    color: white;
 }
 
 .snow {
@@ -72,21 +73,22 @@ button {
     100% { transform: scale(8); opacity: 0; }
 }
 
+/* توهج خفيف للحروف */
 .glow {
-    text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 20px #f0f, 0 0 30px #0ff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
 }
 </style>
 </head>
 <body>
 
-<h1>🎄⛄ Marry Christmas ENGYYYY ⛄🎄</h1>
+<h1>🎄⛄ عيد ميلاد سعيد ENGYYYY ⛄🎄</h1>
 
 <button onclick="openGift()">🎁 افتح الهدية</button>
 
 <div id="gift"></div>
 
 <audio autoplay loop>
-    <source src="4_5806494887373177798.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -100,24 +102,18 @@ const giftText = `✨🎄
 const surpriseText = `
 💥 مفاجأة 💥
 
-دلوقتي جه وقت الضحك والمرح 😎
+دلوقتي جاء وقت الضحك والمرح 😎
 عايزك تضحكي جامد 😂😂😂
 وتستمتعي باليوم ده للآخر! 🎉🎊
 كل سنة وانتي مليانة فرح وسعادة وهزار 🥰♥️
 ...وطبعًا كله من Darrrrrrrshhhhh 😈🔥`;
 
-function randomColor() {
-    const colors = ['#ff0','#f0f','#0ff','#f00','#0f0','#00f','#ffa500','#fff'];
-    return colors[Math.floor(Math.random()*colors.length)];
-}
-
-function typeGlowWriter(element, text, speed, callback) {
+function typeWriter(element, text, speed, callback) {
     let i = 0;
     function type() {
         if (i < text.length) {
             const span = document.createElement('span');
             span.textContent = text.charAt(i);
-            span.style.color = randomColor();
             span.classList.add('glow');
             element.appendChild(span);
             
@@ -147,11 +143,11 @@ function openGift() {
     const giftDiv = document.getElementById("gift");
     giftDiv.style.display = "block";
     giftDiv.textContent = "";
-    typeGlowWriter(giftDiv, giftText, 50, () => {
+    typeWriter(giftDiv, giftText, 50, () => {
         setTimeout(() => {
             giftDiv.appendChild(document.createElement("br"));
             giftDiv.appendChild(document.createElement("br"));
-            typeGlowWriter(giftDiv, surpriseText, 60);
+            typeWriter(giftDiv, surpriseText, 60);
         }, 1000);
     });
 }
