@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title> Marry Christams </title>
+<title>Marry Christmas</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 body {
@@ -77,30 +77,11 @@ h1 { font-size: 34px; margin: 15px 0 5px; }
     margin: 25px auto;
 }
 
-.text, .verse {
+.text {
     font-size: 19px;
     line-height: 1.9;
     color: #e0e0e0;
     min-height: 120px;
-}
-
-.verse { font-style: italic; font-size: 17px; color: #d6c37a; margin-top: 25px; }
-
-button {
-    margin-top: 35px;
-    padding: 14px 40px;
-    border-radius: 40px;
-    border: 1px solid #ffd700;
-    background: transparent;
-    color: #ffd700;
-    cursor: pointer;
-    transition: .3s;
-}
-
-button:hover {
-    background: #ffd700;
-    color: #111;
-    box-shadow: 0 0 20px #ffd70099;
 }
 
 .footer { margin-top: 35px; color: #bbb; }
@@ -134,14 +115,13 @@ button:hover {
     position: fixed;
     width: 8px;
     height: 8px;
-    background: gold;
     border-radius: 50%;
     animation: explode 1.5s ease-out forwards;
 }
 
 @keyframes explode {
     0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(12); opacity: 0; }
+    100% { transform: scale(15); opacity: 0; }
 }
 </style>
 </head>
@@ -153,12 +133,12 @@ button:hover {
 
 <div class="card">
     <div class="icon">⛄🎄</div>
-    <h1> Marry Christmas </h1>
+    <h1>Marry Christmas</h1>
     <div class="name" id="friendName">ENGYYYY</div>
     <div class="divider"></div>
     <div class="text" id="textContent"></div>
     <div id="secretMessage">🎁 مفاجأة: اطولي شوية بقي 🎁</div>
-    <div class="footer"> With Love — Darrrrrrrshhhhh 😈🔥</div>
+    <div class="footer">With Love — Darrrrrrrshhhhh 😈🔥</div>
 </div>
 
 <script>
@@ -169,11 +149,10 @@ const fullText = `⛄🎄
 كل سنة وإنتي طيبة وبخير يا إنشيييييسي
 وعيد سعيد عليكي وعلى كل حبايبك
 وربنا يجعلها سنة كلها فرح وسعادة وهنا
-وتحققي كل اللي نفسك فيه🥰🥰🥰 🥰🥰♥️🔥🔥`;
+وتحققي كل اللي نفسك فيه 🥰🥰🥰 🥰🥰♥️🔥🔥`;
 
 const textContainer = document.getElementById("textContent");
 let i = 0;
-
 function typeWriter() {
     if (i < fullText.length) {
         textContainer.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
@@ -183,35 +162,35 @@ function typeWriter() {
 }
 typeWriter();
 
-// Show secret message after 8 seconds
 setTimeout(() => {
     document.getElementById("secretMessage").style.opacity = 1;
 }, 8000);
 
-// Add falling snowflakes ⛄🎄
-for(let i=0;i<80;i++){
+// Falling snowflakes
+for(let i=0;i<120;i++){
     const snow = document.createElement('div');
     snow.classList.add('snowflake');
     snow.style.left = Math.random() * 100 + 'vw';
-    snow.style.fontSize = (14 + Math.random() * 20) + 'px';
+    snow.style.fontSize = (14 + Math.random() * 24) + 'px';
     snow.style.animationDuration = (Math.random()*5 + 5) + 's';
     snow.style.opacity = Math.random();
     snow.textContent = Math.random() < 0.5 ? '⛄' : '🎄';
     document.body.appendChild(snow);
 }
 
-// Strong fireworks
+// Dynamic fireworks
+const colors = ["#FFD700","#FF4500","#00FFFF","#FF69B4","#ADFF2F","#00FF7F"];
 setInterval(() => {
-    for(let j=0;j<5;j++){
+    for(let j=0;j<10;j++){
         const fw = document.createElement("div");
         fw.className = "firework";
-        fw.style.left = Math.random() * 100 + "vw";
-        fw.style.top = Math.random() * 60 + "vh";
+        fw.style.left = Math.random()*100 + "vw";
+        fw.style.top = Math.random()*50 + "vh";
+        fw.style.background = colors[Math.floor(Math.random()*colors.length)];
         document.body.appendChild(fw);
         setTimeout(() => fw.remove(), 2000);
     }
-}, 700);
-
+}, 500);
 </script>
 
 </body>
