@@ -1,181 +1,194 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>عيد ميلاد سعيد</title>
+<title>Merry Christmas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(120deg, #0a2a43, #000);
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
-    color: white;
-    text-align: center;
-    direction: rtl;
-}
+    body {
+        margin: 0;
+        font-family: 'Cairo', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(-45deg, #1a1a1a, #0f0f0f, #111, #222);
+        background-size: 400% 400%;
+        animation: bgMove 30s ease infinite;
+        color: #f5f5f5;
+    }
+    @keyframes bgMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-h1 {
-    margin-top: 30px;
-    font-size: 40px;
-    text-shadow: 0 0 15px gold;
-}
+    .snowflake {
+        position: absolute;
+        top: -10px;
+        color: white;
+        font-size: 1em;
+        user-select: none;
+        z-index: 9999;
+        pointer-events: none;
+        animation-name: fall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity:1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+    }
 
-button {
-    margin-top: 40px;
-    padding: 15px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    background: linear-gradient(45deg, red, gold);
-    color: white;
-    box-shadow: 0 0 20px red;
-}
+    .card {
+        position: relative;
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+        border-radius: 28px;
+        padding: 55px 45px;
+        max-width: 650px;
+        width: 90%;
+        box-shadow: 0 30px 60px rgba(0,0,0,.7),
+                    inset 0 0 0 1px rgba(255,215,0,.15);
+        text-align: center;
+        animation: fadeUp 1.6s ease forwards;
+        opacity: 0;
+        transform: translateY(40px);
+        z-index: 1;
+    }
+    @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-#gift {
-    display: none;
-    margin: 40px auto;
-    width: 80%;
-    max-width: 600px;
-    padding: 25px;
-    background: rgba(0,0,0,0.6);
-    border-radius: 20px;
-    box-shadow: 0 0 30px pink;
-    font-size: 20px;
-    white-space: pre-wrap;
-    color: white;
-}
+    .icon {
+        font-size: 60px;
+        color: #ffd700;
+        text-shadow: 0 0 15px #ffd70055;
+        animation: glow 2.5s infinite;
+    }
+    @keyframes glow {
+        0%,100% { text-shadow: 0 0 10px #ffd70055; }
+        50% { text-shadow: 0 0 25px #ffd700cc; }
+    }
 
-.snow {
-    position: fixed;
-    top: -10px;
-    color: white;
-    font-size: 15px;
-    animation: fall linear infinite;
-}
+    h1 { font-size: 34px; margin: 15px 0 5px; }
+    .name {
+        font-size: 28px;
+        color: #ffd700;
+        margin-bottom: 20px;
+        font-weight: 700;
+        animation: shine 2s infinite;
+    }
+    @keyframes shine {
+        0%,100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700; }
+        50% { text-shadow: 0 0 20px #fff, 0 0 30px #ffd700; }
+    }
 
-@keyframes fall {
-    to { transform: translateY(110vh); }
-}
+    .divider {
+        width: 90px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #ffd700, transparent);
+        margin: 25px auto;
+    }
 
-.firework {
-    position: fixed;
-    width: 5px;
-    height: 5px;
-    background: gold;
-    border-radius: 50%;
-    animation: explode 1.5s ease-out forwards;
-}
+    .text, .verse {
+        font-size: 19px;
+        line-height: 1.9;
+        color: #e0e0e0;
+        min-height: 120px;
+    }
 
-@keyframes explode {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(8); opacity: 0; }
-}
+    .verse { font-style: italic; font-size: 17px; color: #d6c37a; margin-top: 25px; }
 
-.glow {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
-}
+    button {
+        margin-top: 35px;
+        padding: 14px 40px;
+        border-radius: 40px;
+        border: 1px solid #ffd700;
+        background: transparent;
+        color: #ffd700;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    button:hover {
+        background: #ffd700;
+        color: #111;
+        box-shadow: 0 0 20px #ffd70099;
+    }
+
+    .footer { margin-top: 35px; color: #bbb; }
+
+    #secretMessage {
+        font-size: 20px;
+        color: #ffd700;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s;
+    }
 </style>
 </head>
 <body>
 
-<h1>🎄 عيد ميلاد سعيد 🎄</h1>
-
-<button onclick="openGift()">🎁 افتح الهدية</button>
-
-<div id="gift"></div>
-
-<audio autoplay loop>
+<audio id="music" loop>
+    <!-- Replace with any working direct MP3 link -->
     <source src="4_5806494887373177798.mp3" type="audio/mpeg">
 </audio>
 
+<div class="card">
+    <div class="icon">⭐</div>
+    <h1>Merry Christmas</h1>
+    <div class="name" id="friendName">YOUR FRIEND'S NAME</div>
+    <div class="divider"></div>
+    <div class="text" id="textContent"></div>
+    <button onclick="playMusic()">Play Music 🎶</button>
+    <div id="secretMessage">🎁 Surprise: Wishing you a year full of joy and success! 🎁</div>
+    <div class="footer">With love — Mostafa</div>
+</div>
+
 <script>
-const giftText = `✨🎄  
-كل سنة وإنتي طيبة وبخير يا إنشيييييسي
-وعيد سعيد عليكي وعلى كل حبايبك
-وربنا يجعلها سنة كلها فرح وسعادة وهنا
-وتحققي كل اللي نفسك فيه 🥰🥰🥰 🥰🥰♥️🔥🔥
-😈🥰 Darrrrrrrshhhhh`;
+    const friendName = "ENGYYYYYYYYYYYYYYYYY";
+    document.getElementById("friendName").textContent = friendName;
 
-const surpriseText = `
-💥 مفاجأة 💥
+    const fullText = `As the birth of Christ approaches,
+I send you all love, joy, and hope.
+May peace fill your heart,
+and may your coming days be full of success, health, and happiness.`;
 
-دلوقتي جاء وقت الضحك والمرح 😎
-عايزك تضحكي جامد 😂😂😂
-وتستمتعي باليوم ده للآخر! 🎉🎊
-كل سنة وانتي مليانة فرح وسعادة وهزار 🥰♥️
-...وطبعًا كله من Darrrrrrrshhhhh 😈🔥`;
-
-function typeWriter(element, text, speed, callback) {
+    const textContainer = document.getElementById("textContent");
     let i = 0;
-    function type() {
-        if (i < text.length) {
-            const span = document.createElement('span');
-            span.textContent = text.charAt(i);
-            span.classList.add('glow');
-            element.appendChild(span);
-            
-            if(text.charAt(i) === '\n') {
-                createFirework();
-            }
 
+    function typeWriter() {
+        if (i < fullText.length) {
+            textContainer.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
             i++;
-            setTimeout(type, speed);
-        } else if (callback) {
-            callback();
+            setTimeout(typeWriter, 50);
         }
     }
-    type();
-}
+    typeWriter();
 
-function createFirework() {
-    let fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = Math.random() * 90 + "vw";
-    fw.style.top = Math.random() * 50 + "vh";
-    document.body.appendChild(fw);
-    setTimeout(() => fw.remove(), 1500);
-}
+    // Show secret message after 8 seconds
+    setTimeout(() => {
+        document.getElementById("secretMessage").style.opacity = 1;
+    }, 8000);
 
-function openGift() {
-    const giftDiv = document.getElementById("gift");
-    giftDiv.style.display = "block";
-    giftDiv.textContent = "";
-    typeWriter(giftDiv, giftText, 50, () => {
-        setTimeout(() => {
-            giftDiv.appendChild(document.createElement("br"));
-            giftDiv.appendChild(document.createElement("br"));
-            typeWriter(giftDiv, surpriseText, 60, () => {
-                giftDiv.appendChild(document.createElement("br"));
-                giftDiv.appendChild(document.createElement("br"));
-                giftDiv.innerHTML += "🎉 عيد ميلاد سعيد! 🎉";
-            });
-        }, 1000);
-    });
-}
+    function playMusic() {
+        document.getElementById("music").play();
+    }
 
-// الثلج
-for (let i = 0; i < 60; i++) {
-    let snow = document.createElement("div");
-    snow.className = "snow";
-    snow.innerHTML = "❄";
-    snow.style.left = Math.random() * 100 + "vw";
-    snow.style.animationDuration = (3 + Math.random() * 5) + "s";
-    snow.style.fontSize = (10 + Math.random() * 20) + "px";
-    document.body.appendChild(snow);
-}
-
-// الألعاب النارية العشوائية
-setInterval(() => {
-    let fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = Math.random() * 100 + "vw";
-    fw.style.top = Math.random() * 60 + "vh";
-    document.body.appendChild(fw);
-    setTimeout(() => fw.remove(), 1500);
-}, 800);
-
+    // Add snow
+    const snowCount = 60;
+    for(let i=0;i<snowCount;i++){
+        const snow = document.createElement('div');
+        snow.classList.add('snowflake');
+        snow.style.left = Math.random() * 100 + 'vw';
+        snow.style.fontSize = (Math.random()*10 + 10) + 'px';
+        snow.style.animationDuration = (Math.random()*5 + 5) + 's';
+        snow.style.opacity = Math.random();
+        snow.textContent = '❄';
+        document.body.appendChild(snow);
+    }
 </script>
 
 </body>
