@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,58 +7,56 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   height:100vh;
   overflow:hidden;
-  background: radial-gradient(circle at top,#1a2a6c,#0f2027);
   font-family:'Segoe UI',sans-serif;
-  color:#fff;
   text-align:center;
+  color:white;
+  background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1b2735);
+  background-size:400% 400%;
+  animation:bgMove 12s infinite alternate;
 }
 
-.stars{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:url("https://i.imgur.com/7b1sFZp.png");
-  animation: moveStars 60s linear infinite;
-}
-@keyframes moveStars{
-  from{background-position:0 0}
-  to{background-position:-2000px 2000px}
+@keyframes bgMove{
+  from{background-position:0%}
+  to{background-position:100%}
 }
 
 h1{
   margin-top:70px;
-  font-size:3.2em;
+  font-size:3em;
   letter-spacing:2px;
-  text-shadow:0 0 25px gold;
 }
 
-#engy{
+#name{
   font-size:4em;
   font-weight:bold;
-  background:linear-gradient(45deg,gold,white,gold);
+  background:linear-gradient(90deg,#ffd700,#ffffff,#ffd700);
   -webkit-background-clip:text;
   color:transparent;
-  animation: glow 2s infinite alternate;
+  text-shadow:0 0 25px gold;
+  animation:glow 2s infinite alternate;
 }
+
 @keyframes glow{
-  from{text-shadow:0 0 20px gold}
-  to{text-shadow:0 0 40px white}
+  from{text-shadow:0 0 15px gold}
+  to{text-shadow:0 0 35px white}
 }
 
 button{
-  margin-top:60px;
-  padding:18px 40px;
+  margin-top:50px;
+  padding:18px 45px;
   font-size:1.4em;
   border:none;
   border-radius:50px;
-  background:linear-gradient(45deg,#ffd700,#ffb700);
-  cursor:pointer;
+  background:linear-gradient(45deg,#ffd700,#ffae00);
   box-shadow:0 0 30px gold;
+  cursor:pointer;
   animation:pulse 1.5s infinite;
 }
+
 @keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.1)}
@@ -78,8 +76,9 @@ button{
   background:white;
   border-radius:50%;
   opacity:.8;
-  animation: fall linear infinite;
+  animation:fall linear infinite;
 }
+
 @keyframes fall{
   from{transform:translateY(-10vh)}
   to{transform:translateY(110vh)}
@@ -88,9 +87,9 @@ button{
 .heart{
   position:absolute;
   font-size:18px;
-  color:#ff4d6d;
-  animation: float 6s linear infinite;
+  animation:float 6s linear infinite;
 }
+
 @keyframes float{
   from{transform:translateY(110vh);opacity:1}
   to{transform:translateY(-10vh);opacity:0}
@@ -100,11 +99,12 @@ button{
   position:absolute;
   width:8px;
   height:8px;
-  background:gold;
+  background:#ffd700;
   border-radius:50%;
-  animation: explode 1s ease-out forwards;
+  animation:boom 1s ease-out forwards;
 }
-@keyframes explode{
+
+@keyframes boom{
   to{transform:scale(8);opacity:0}
 }
 </style>
@@ -112,10 +112,8 @@ button{
 
 <body>
 
-<div class="stars"></div>
-
-<h1>Merry Christmas</h1>
-<div id="engy">Engy 🎄</div>
+<h1>🎄 Merry Christmas 🎄</h1>
+<div id="name">Engy</div>
 
 <button onclick="openGift()">🎁 افتح الهدية</button>
 
@@ -123,7 +121,7 @@ button{
 <div id="countdown"></div>
 
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/audio/2022/12/15/audio_4a8f1b4a35.mp3">
+  <source src="https://cdn.pixabay.com/audio/2022/12/15/audio_4a8f1b4a35.mp3">
 </audio>
 
 <script>
@@ -134,18 +132,19 @@ function openGift(){
  countdown.style.display="block";
  startTyping();
  effects();
- countdownStart();
+ startCountdown();
 }
 
-const text=`Merry Christmas يا إنجي 🎅✨
-سنة جديدة مليانة فرح 🎄
-أحلى صاحبة وأجدع حد ❤️
-Enjoy the magic ✨`;
+const message =
+"Merry Christmas يا إنجي 🎅✨\n"+
+"سنة جديدة كلها فرح ونجاح 🎄\n"+
+"أحلى صاحبة وأجدع حد ❤️\n"+
+"Enjoy the Christmas vibes 🎶";
 
 let i=0;
 function startTyping(){
- if(i<text.length){
-  typing.innerHTML+=text[i]==="\n"?"<br>":text[i];
+ if(i<message.length){
+  typing.innerHTML += message[i]==='\n' ? '<br>' : message[i];
   i++;
   setTimeout(startTyping,70);
  }
@@ -168,7 +167,7 @@ function effects(){
   h.style.left=Math.random()*100+"vw";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
- },400);
+ },450);
 
  setInterval(()=>{
   let f=document.createElement("div");
@@ -177,17 +176,17 @@ function effects(){
   f.style.top=Math.random()*60+"vh";
   document.body.appendChild(f);
   setTimeout(()=>f.remove(),1000);
- },800);
+ },900);
 }
 
 let t=7;
-function countdownStart(){
+function startCountdown(){
  setInterval(()=>{
   if(t>=0){
-   countdown.innerHTML="Opening surprise in "+t+" 🎁";
+   countdown.innerHTML="Surprise in "+t+" 🎁";
    t--;
   }else{
-   countdown.innerHTML="🎉 You're Amazing Engy 🎉";
+   countdown.innerHTML="🎉 You're Awesome Engy 🎉";
   }
  },1000);
 }
