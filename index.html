@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <title>Marry Christmas</title>
@@ -12,6 +12,7 @@ body {
     font-family: 'Arial', sans-serif;
     color: white;
     text-align: center;
+    direction: rtl; /* العربية من اليمين لليسار */
 }
 
 h1 {
@@ -63,12 +64,16 @@ button {
     height: 5px;
     background: gold;
     border-radius: 50%;
-    animation: explode 1.5s ease-out infinite;
+    animation: explode 1.5s ease-out forwards;
 }
 
 @keyframes explode {
     0% { transform: scale(1); opacity: 1; }
     100% { transform: scale(8); opacity: 0; }
+}
+
+.glow {
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 20px #f0f, 0 0 30px #0ff;
 }
 </style>
 </head>
@@ -81,32 +86,45 @@ button {
 <div id="gift"></div>
 
 <audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <source src="4_5806494887373177798.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const giftText = `✨🎄  
 كل سنة وإنتي طيبة وبخير يا إنشيييييسي
-وعيد سعيد عليكي وعلي كل حبايبك
+وعيد سعيد عليكي وعلى كل حبايبك
 وربنا يجعلها سنة كلها فرح وسعادة وهنا
 وتحققي كل اللي نفسك فيه 🥰🥰🥰 🥰🥰♥️🔥🔥
 😈🥰 Darrrrrrrshhhhh`;
 
-// Surprise text (أطول شوية 😂😂♥️🥰)
 const surpriseText = `
-💥 SURPRISE 💥
+💥 مفاجأة 💥
 
-دلوقتي جه الوقت للضحك والجنون 😎
+دلوقتي جه وقت الضحك والمرح 😎
 عايزك تضحكي جامد 😂😂😂
 وتستمتعي باليوم ده للآخر! 🎉🎊
-كل سنة وانتي فوق بعضك فرح وسعادة وهزار 🥰♥️
-...وطبعًا ده كله من Darrrrrrrshhhhh 😈🔥`;
+كل سنة وانتي مليانة فرح وسعادة وهزار 🥰♥️
+...وطبعًا كله من Darrrrrrrshhhhh 😈🔥`;
 
-function typeWriter(element, text, speed, callback) {
+function randomColor() {
+    const colors = ['#ff0','#f0f','#0ff','#f00','#0f0','#00f','#ffa500','#fff'];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+function typeGlowWriter(element, text, speed, callback) {
     let i = 0;
     function type() {
         if (i < text.length) {
-            element.textContent += text.charAt(i);
+            const span = document.createElement('span');
+            span.textContent = text.charAt(i);
+            span.style.color = randomColor();
+            span.classList.add('glow');
+            element.appendChild(span);
+            
+            if(text.charAt(i) === '\n') {
+                createFirework();
+            }
+
             i++;
             setTimeout(type, speed);
         } else if (callback) {
@@ -116,20 +134,29 @@ function typeWriter(element, text, speed, callback) {
     type();
 }
 
+function createFirework() {
+    let fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random() * 90 + "vw";
+    fw.style.top = Math.random() * 50 + "vh";
+    document.body.appendChild(fw);
+    setTimeout(() => fw.remove(), 1500);
+}
+
 function openGift() {
     const giftDiv = document.getElementById("gift");
     giftDiv.style.display = "block";
     giftDiv.textContent = "";
-    typeWriter(giftDiv, giftText, 50, () => {
-        // بعد انتهاء الكتابة الأولى، نبدأ الكتابة الثانية بعد ثانية
+    typeGlowWriter(giftDiv, giftText, 50, () => {
         setTimeout(() => {
-            giftDiv.textContent += "\n\n"; // مسافة بين الرسالتين
-            typeWriter(giftDiv, surpriseText, 60);
+            giftDiv.appendChild(document.createElement("br"));
+            giftDiv.appendChild(document.createElement("br"));
+            typeGlowWriter(giftDiv, surpriseText, 60);
         }, 1000);
     });
 }
 
-// Snow
+// الثلج
 for (let i = 0; i < 60; i++) {
     let snow = document.createElement("div");
     snow.className = "snow";
@@ -140,7 +167,7 @@ for (let i = 0; i < 60; i++) {
     document.body.appendChild(snow);
 }
 
-// Fireworks
+// الألعاب النارية العشوائية
 setInterval(() => {
     let fw = document.createElement("div");
     fw.className = "firework";
@@ -148,7 +175,7 @@ setInterval(() => {
     fw.style.top = Math.random() * 60 + "vh";
     document.body.appendChild(fw);
     setTimeout(() => fw.remove(), 1500);
-}, 500);
+}, 800);
 
 </script>
 
