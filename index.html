@@ -43,7 +43,7 @@ button {
     border-radius: 20px;
     box-shadow: 0 0 30px pink;
     font-size: 20px;
-    white-space: pre-wrap; 
+    white-space: pre-wrap;
     color: white;
 }
 
@@ -73,7 +73,6 @@ button {
     100% { transform: scale(8); opacity: 0; }
 }
 
-/* توهج خفيف للحروف */
 .glow {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff;
 }
@@ -81,7 +80,7 @@ button {
 </head>
 <body>
 
-<h1>🎄⛄ عيد ميلاد سعيد ENGYYYY ⛄🎄</h1>
+<h1>🎄 عيد ميلاد سعيد 🎄</h1>
 
 <button onclick="openGift()">🎁 افتح الهدية</button>
 
@@ -147,7 +146,11 @@ function openGift() {
         setTimeout(() => {
             giftDiv.appendChild(document.createElement("br"));
             giftDiv.appendChild(document.createElement("br"));
-            typeWriter(giftDiv, surpriseText, 60);
+            typeWriter(giftDiv, surpriseText, 60, () => {
+                giftDiv.appendChild(document.createElement("br"));
+                giftDiv.appendChild(document.createElement("br"));
+                giftDiv.innerHTML += "🎉 عيد ميلاد سعيد! 🎉";
+            });
         }, 1000);
     });
 }
