@@ -67,6 +67,7 @@ button{
   display:none;
   margin-top:30px;
   font-size:1.6em;
+  line-height:1.6;
 }
 
 .snow{
@@ -120,73 +121,104 @@ button{
 <div id="typing"></div>
 <div id="countdown"></div>
 
-<audio id="music" loop>
+<!-- Audio -->
+<audio id="music" autoplay loop muted>
   <source src="https://cdn.pixabay.com/audio/2022/12/15/audio_4a8f1b4a35.mp3">
 </audio>
 
 <script>
+const music = document.getElementById("music");
+const typing = document.getElementById("typing");
+const countdown = document.getElementById("countdown");
+
+// رسالة الهدية
+const message =
+"كل سنة وانتي طيبة وبخير وسعادة يارب 🤲♥️\n"+
+"وتكون سنة سعيدة عليكي 🎄✨\n"+
+"وتحققي كل اللي بتتمنيه 💫\n"+
+"وتطولي شوية 😂😂😂\n"+
+"وعيد سعيد عليكم يارب 🤲🥰";
+
+let i = 0;
+
 function openGift(){
  document.querySelector("button").style.display="none";
+
+ // تشغيل الصوت + Fade In
+ music.muted = false;
+ music.volume = 0;
  music.play();
+ fadeInAudio();
+
  typing.style.display="block";
  countdown.style.display="block";
+
  startTyping();
  effects();
  startCountdown();
 }
 
-const message =
-"Merry Christmas يا إنجي 🎅✨\n"+
-"سنة جديدة كلها فرح ونجاح 🎄\n"+
-"أحلى صاحبة وأجدع حد ❤️\n"+
-"Enjoy the Christmas vibes 🎶";
-
-let i=0;
+// كتابة حرف حرف
 function startTyping(){
- if(i<message.length){
-  typing.innerHTML += message[i]==='\n' ? '<br>' : message[i];
+ if(i < message.length){
+  typing.innerHTML += message[i] === "\n" ? "<br>" : message[i];
   i++;
   setTimeout(startTyping,70);
  }
 }
 
+// Fade In للصوت
+function fadeInAudio(){
+ let vol = 0;
+ let fade = setInterval(()=>{
+   if(vol < 1){
+     vol += 0.05;
+     music.volume = vol;
+   } else {
+     clearInterval(fade);
+   }
+ },200);
+}
+
+// المؤثرات
 function effects(){
  setInterval(()=>{
-  let s=document.createElement("div");
-  s.className="snow";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=5+Math.random()*5+"s";
+  let s = document.createElement("div");
+  s.className = "snow";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.animationDuration = 5 + Math.random()*5 + "s";
   document.body.appendChild(s);
   setTimeout(()=>s.remove(),10000);
  },120);
 
  setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random()*100 + "vw";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
  },450);
 
  setInterval(()=>{
-  let f=document.createElement("div");
-  f.className="firework";
-  f.style.left=Math.random()*100+"vw";
-  f.style.top=Math.random()*60+"vh";
+  let f = document.createElement("div");
+  f.className = "firework";
+  f.style.left = Math.random()*100 + "vw";
+  f.style.top = Math.random()*60 + "vh";
   document.body.appendChild(f);
   setTimeout(()=>f.remove(),1000);
  },900);
 }
 
-let t=7;
+// العد التنازلي
+let t = 7;
 function startCountdown(){
  setInterval(()=>{
-  if(t>=0){
-   countdown.innerHTML="Surprise in "+t+" 🎁";
+  if(t >= 0){
+   countdown.innerHTML = "Surprise in " + t + " 🎁";
    t--;
-  }else{
-   countdown.innerHTML="🎉 You're Awesome Engy 🎉";
+  } else {
+   countdown.innerHTML = "🎉 Merry Christmas Engy 🎉";
   }
  },1000);
 }
