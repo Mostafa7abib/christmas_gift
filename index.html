@@ -1,104 +1,121 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Merry Christmas Engy 🎄</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: linear-gradient(-45deg,#8b0000,#006400,#0a043c,#8b0000);
-  background-size: 400% 400%;
-  animation: bg 10s infinite alternate;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  height:100vh;
+  overflow:hidden;
+  background: radial-gradient(circle at top,#1a2a6c,#0f2027);
+  font-family:'Segoe UI',sans-serif;
+  color:#fff;
+  text-align:center;
 }
 
-@keyframes bg {
-  0%{background-position:0%}
-  100%{background-position:100%}
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("https://i.imgur.com/7b1sFZp.png");
+  animation: moveStars 60s linear infinite;
+}
+@keyframes moveStars{
+  from{background-position:0 0}
+  to{background-position:-2000px 2000px}
 }
 
-h1 {
-  font-size: 3em;
-  margin-top: 80px;
+h1{
+  margin-top:70px;
+  font-size:3.2em;
+  letter-spacing:2px;
+  text-shadow:0 0 25px gold;
+}
+
+#engy{
+  font-size:4em;
+  font-weight:bold;
+  background:linear-gradient(45deg,gold,white,gold);
+  -webkit-background-clip:text;
+  color:transparent;
   animation: glow 2s infinite alternate;
 }
-
-@keyframes glow {
-  from {text-shadow:0 0 10px gold;}
-  to {text-shadow:0 0 30px white;}
+@keyframes glow{
+  from{text-shadow:0 0 20px gold}
+  to{text-shadow:0 0 40px white}
 }
 
-#typing {
-  font-size: 1.5em;
-  margin: 20px;
-  display:none;
+button{
+  margin-top:60px;
+  padding:18px 40px;
+  font-size:1.4em;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(45deg,#ffd700,#ffb700);
+  cursor:pointer;
+  box-shadow:0 0 30px gold;
+  animation:pulse 1.5s infinite;
 }
-
-#countdown {
-  font-size: 2em;
-  margin-top: 20px;
-  display:none;
-}
-
-button {
-  margin-top: 40px;
-  padding: 15px 30px;
-  font-size: 1.3em;
-  border: none;
-  border-radius: 30px;
-  background: gold;
-  color: black;
-  cursor: pointer;
-  box-shadow: 0 0 20px gold;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
+@keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.1)}
   100%{transform:scale(1)}
 }
 
-.heart, .snow, .firework {
+#typing,#countdown{
+  display:none;
+  margin-top:30px;
+  font-size:1.6em;
+}
+
+.snow{
   position:absolute;
-  pointer-events:none;
-}
-
-.heart { animation: float 5s linear infinite; }
-@keyframes float {
-  from {transform: translateY(100vh); opacity:1;}
-  to {transform: translateY(-10vh); opacity:0;}
-}
-
-.snow { animation: snow 10s linear infinite; }
-@keyframes snow {
-  from {top:-10px;}
-  to {top:110vh;}
-}
-
-.firework {
   width:6px;
   height:6px;
-  background: gold;
+  background:white;
   border-radius:50%;
-  animation: boom 1s ease-out;
+  opacity:.8;
+  animation: fall linear infinite;
 }
-@keyframes boom {
-  0% {transform:scale(0);}
-  100% {transform:scale(6); opacity:0;}
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
+
+.heart{
+  position:absolute;
+  font-size:18px;
+  color:#ff4d6d;
+  animation: float 6s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh);opacity:1}
+  to{transform:translateY(-10vh);opacity:0}
+}
+
+.firework{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:gold;
+  border-radius:50%;
+  animation: explode 1s ease-out forwards;
+}
+@keyframes explode{
+  to{transform:scale(8);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎄 Merry Christmas Engy 🎄</h1>
+<div class="stars"></div>
+
+<h1>Merry Christmas</h1>
+<div id="engy">Engy 🎄</div>
 
 <button onclick="openGift()">🎁 افتح الهدية</button>
 
@@ -106,77 +123,73 @@ button {
 <div id="countdown"></div>
 
 <audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+<source src="https://cdn.pixabay.com/audio/2022/12/15/audio_4a8f1b4a35.mp3">
 </audio>
 
 <script>
 function openGift(){
-  document.querySelector("button").style.display="none";
-  document.getElementById("typing").style.display="block";
-  document.getElementById("countdown").style.display="block";
-  document.getElementById("music").play();
-  startTyping();
-  startEffects();
-  startCountdown();
+ document.querySelector("button").style.display="none";
+ music.play();
+ typing.style.display="block";
+ countdown.style.display="block";
+ startTyping();
+ effects();
+ countdownStart();
 }
 
-// typing
-const text =
-"Merry Christmas يا إنجي 🎅❤️\n" +
-"سنة سعيدة عليكي 🎄✨\n" +
-"أحلى صاحبة وأجدع حد 🎁\n" +
-"Enjoy the vibes 💃🔥";
+const text=`Merry Christmas يا إنجي 🎅✨
+سنة جديدة مليانة فرح 🎄
+أحلى صاحبة وأجدع حد ❤️
+Enjoy the magic ✨`;
 
 let i=0;
 function startTyping(){
-  if(i<text.length){
-    typing.innerHTML += text[i]==="\n"?"<br>":text[i];
-    i++;
-    setTimeout(startTyping,80);
+ if(i<text.length){
+  typing.innerHTML+=text[i]==="\n"?"<br>":text[i];
+  i++;
+  setTimeout(startTyping,70);
+ }
+}
+
+function effects(){
+ setInterval(()=>{
+  let s=document.createElement("div");
+  s.className="snow";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),10000);
+ },120);
+
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ },400);
+
+ setInterval(()=>{
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"vw";
+  f.style.top=Math.random()*60+"vh";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+ },800);
+}
+
+let t=7;
+function countdownStart(){
+ setInterval(()=>{
+  if(t>=0){
+   countdown.innerHTML="Opening surprise in "+t+" 🎁";
+   t--;
+  }else{
+   countdown.innerHTML="🎉 You're Amazing Engy 🎉";
   }
-}
-
-// effects
-function startEffects(){
-  setInterval(()=>{
-    let s=document.createElement("div");
-    s.className="snow";
-    s.innerHTML="❄";
-    s.style.left=Math.random()*100+"vw";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),10000);
-  },200);
-
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),5000);
-  },400);
-
-  setInterval(()=>{
-    let f=document.createElement("div");
-    f.className="firework";
-    f.style.left=Math.random()*100+"vw";
-    f.style.top=Math.random()*100+"vh";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),1000);
-  },600);
-}
-
-// countdown
-let time=10;
-function startCountdown(){
-  setInterval(()=>{
-    if(time>=0){
-      countdown.innerHTML="Surprise in "+time+" 🎁";
-      time--;
-    } else {
-      countdown.innerHTML="🎉 You're Awesome Engy 🎉";
-    }
-  },1000);
+ },1000);
 }
 </script>
 
