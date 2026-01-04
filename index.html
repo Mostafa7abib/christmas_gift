@@ -145,7 +145,7 @@ button:hover {
 </head>
 <body>
 
-<audio id="music" autoplay loop>
+<audio id="music" loop>
     <source src="4_5806494887373177798.mp3" type="audio/mpeg">
 </audio>
 
@@ -187,7 +187,9 @@ typeWriter();
 // زر المفاجأة
 document.getElementById("surpriseBtn").addEventListener("click", function(){
     const secret = document.getElementById("secretMessage");
-    secret.style.opacity = 1;
+    secret.style.opacity = 1;          // إظهار الرسالة
+    this.style.display = "none";       // إخفاء الزر
+    document.getElementById("music").play(); // تشغيل الموسيقى بعد الضغط
 });
 
 // تلج ⛄🎄
